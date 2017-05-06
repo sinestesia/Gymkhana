@@ -1,0 +1,30 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="es.pamp.gymkhana.HomeActivity">
+    <item
+        android:id="@+id/info"
+        android:orderInCategory="100"
+        android:title="Información" />
+    <item
+        android:id="@+id/ajustes"
+        android:orderInCategory="101"
+        android:title="Ajustes"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/acercaDe"
+        android:orderInCategory="102"
+        android:title="Acerca De"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_buscar"
+        android:title="Buscar"
+        android:icon="@drawable/ic_action_name"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_info"
+        android:title="Información"
+        android:icon="@drawable/ic_action_info"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom" />
+</menu>
