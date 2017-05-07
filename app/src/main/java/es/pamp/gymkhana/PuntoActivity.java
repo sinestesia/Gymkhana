@@ -1,69 +1,53 @@
 package es.pamp.gymkhana;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
+import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.Toast;
 
-public class HomeActivity extends AppCompatActivity {
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+public class PuntoActivity extends AppCompatActivity  {
     private Toast toast;
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_punto);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Inicializa estado de prueba
-        final SharedPreferences estado = getSharedPreferences("Estado",this.MODE_PRIVATE);
-        final SharedPreferences.Editor editorEstado = estado.edit();
-        editorEstado.putString("PuntoActivo", "punto01");
-        editorEstado.commit();
+        SharedPreferences estado = getSharedPreferences("Estado",this.MODE_PRIVATE);
+        String puntoActivo = estado.getString("PuntoActivo", "puntopordefecto");
 
-        Button nuevaBoton = (Button) findViewById(R.id.nueva);
-        Button continuarBoton = (Button) findViewById(R.id.continuar);
+        WebView myWebView = (WebView) this.findViewById(R.id.webView);
+        myWebView.addJavascriptInterface(new WebAppInterface(this), "Android");
+        WebSettings mySettings = myWebView.getSettings();
+        mySettings.setJavaScriptEnabled(true);
 
-
-        Boolean partidaActiva = estado.getBoolean("PartidaActiva", false);
-        if (partidaActiva) {
-            continuarBoton.setVisibility(View.VISIBLE);
-        } else{
-            continuarBoton.setVisibility(View.INVISIBLE);
-        }
+        //TODO recoger valor del punto y generar url
+        String web = "file:///android_asset/elcapricho/" + puntoActivo + ".html";
+        myWebView.loadUrl(web);
+        //myWebView.loadUrl("file:///android_asset/elcapricho/punto01.html");
 
 
-        final Intent intent = new Intent(this, MapaCaprichoActivity.class);
-        final Intent intent2 = new Intent(this, PuntoActivity.class);
 
-        nuevaBoton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                editorEstado.putBoolean("PartidaActiva", true);
-                editorEstado.commit();
-                startActivity(intent);
-                //overridePendingTransition(R.anim.zoom_forward_in, R.anim.zoom_forward_out);
-
-            }
-        });
-
-        continuarBoton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(intent2);
-                //overridePendingTransition(R.anim.zoom_forward_in, R.anim.zoom_forward_out);
-
-            }
-        });
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -104,4 +88,15 @@ public class HomeActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    /**
+     * Manipulates the map once available.
+     * This callback is triggered when the map is ready to be used.
+     * This is where we can add markers or lines, add listeners or move the camera. In this case,
+     * we just add a marker near Sydney, Australia.
+     * If Google Play services is not installed on the device, the user will be prompted to install
+     * it inside the SupportMapFragment. This method will only be triggered once the user has
+     * installed Google Play services and returned to the app.
+     */
+
 }

@@ -8,6 +8,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -40,7 +41,11 @@
 
         <activity
             android:name=".MapaCaprichoActivity"
-            android:label="@string/title_activity_mapa_capricho"></activity>
+            android:label="@string/title_activity_mapa_capricho" />
+        <activity
+            android:name=".PuntoActivity"
+            android:label="@string/title_activity_punto"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

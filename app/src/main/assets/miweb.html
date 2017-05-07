@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Mi Web</title>
+    <script type="text/javascript">
+      function showAndroidDialog (){
+        user=document.getElementById("user").value;
+        pass=document.getElementById("pass").value;
+        Android.showDialog(user, pass);
+      }
+  </script>
+</head>
+<body>
+<div style=""><h1>HOLA</h1></div>
+<form action="" method="post">
+    Usuario:
+    <input type="text" id="user" name="user" value="" />
+    <br/>
+    Contraseña:
+
+    <input type="text" id="pass" name="pass" value="" />
+    <br/>
+
+    <input type="button"  value="Enviar" onclick="showAndroidDialog()" />
+</form>
+</body>
+</html>
