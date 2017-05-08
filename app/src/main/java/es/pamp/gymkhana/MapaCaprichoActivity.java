@@ -83,6 +83,8 @@ public class MapaCaprichoActivity extends AppCompatActivity implements GoogleMap
         mMap.setMapStyle(
                 MapStyleOptions.loadRawResourceStyle(
                         this, R.raw.formato_mapa));
+        // margen para poder visualizar el boton mylocation
+        mMap.setPadding(0,110,0,0);
 
 
         // Marker https://developers.google.com/maps/documentation/android-api/marker?hl=es-419
