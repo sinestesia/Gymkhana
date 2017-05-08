@@ -6,6 +6,7 @@ package es.pamp.gymkhana;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.webkit.JavascriptInterface;
 
@@ -16,6 +17,33 @@ public class WebAppInterface {
     public WebAppInterface(Context context){
         this.context=context;
     }
+
+    @JavascriptInterface
+    public void volver() {
+        Intent intent = new Intent(context, MapaCaprichoActivity.class);
+        context.startActivity(intent);
+    }
+
+    @JavascriptInterface
+    public void completado(String punto) {
+        ElCapricho.completado(context,punto);
+        Intent intent = new Intent(context, MapaCaprichoActivity.class);
+        context.startActivity(intent);
+    }
+
+/*
+
+    Ejemplo de script para la web
+    <script type="text/javascript">
+      function showAndroidDialog (){
+        user=document.getElementById("user").value;
+        pass=document.getElementById("pass").value;
+        Android.showDialog(user, pass);
+      }
+  </script>
+
+
+
     @JavascriptInterface
     public void showDialog(String user, String pass) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
@@ -27,5 +55,5 @@ public class WebAppInterface {
                     }
                 });
         builder.create().show();
-    }
+    }*/
 }

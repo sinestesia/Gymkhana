@@ -31,20 +31,15 @@ public class PuntoActivity extends AppCompatActivity  {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        SharedPreferences estado = getSharedPreferences("Estado",this.MODE_PRIVATE);
-        String puntoActivo = estado.getString("PuntoActivo", "puntopordefecto");
-
         WebView myWebView = (WebView) this.findViewById(R.id.webView);
         myWebView.addJavascriptInterface(new WebAppInterface(this), "Android");
         WebSettings mySettings = myWebView.getSettings();
         mySettings.setJavaScriptEnabled(true);
 
-        //TODO recoger valor del punto y generar url
+        String puntoActivo = getIntent().getExtras().getString("puntoId");
+
         String web = "file:///android_asset/elcapricho/" + puntoActivo + ".html";
         myWebView.loadUrl(web);
-        //myWebView.loadUrl("file:///android_asset/elcapricho/punto01.html");
-
-
 
 
     }

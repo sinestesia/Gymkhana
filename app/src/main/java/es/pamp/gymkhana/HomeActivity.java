@@ -1,8 +1,11 @@
 package es.pamp.gymkhana;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -13,43 +16,54 @@ import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity {
     private Toast toast;
+    private Context contexto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        contexto = getApplicationContext();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Inicializa estado de prueba
-        final SharedPreferences estado = getSharedPreferences("Estado",this.MODE_PRIVATE);
-        final SharedPreferences.Editor editorEstado = estado.edit();
-        editorEstado.putString("PuntoActivo", "punto01");
-        editorEstado.commit();
-
         Button nuevaBoton = (Button) findViewById(R.id.nueva);
-        Button continuarBoton = (Button) findViewById(R.id.continuar);
+        final Button continuarBoton = (Button) findViewById(R.id.continuar);
 
-
-        Boolean partidaActiva = estado.getBoolean("PartidaActiva", false);
-        if (partidaActiva) {
+        if (ElCapricho.estaIniciado(contexto)) {
             continuarBoton.setVisibility(View.VISIBLE);
         } else{
             continuarBoton.setVisibility(View.INVISIBLE);
         }
 
-
         final Intent intent = new Intent(this, MapaCaprichoActivity.class);
-        final Intent intent2 = new Intent(this, PuntoActivity.class);
 
         nuevaBoton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                editorEstado.putBoolean("PartidaActiva", true);
-                editorEstado.commit();
+                if (ElCapricho.estaIniciado(contexto)){
+                    //TODO mostrar dialogo de confirmación
+                    /*
+                    AlertDialog.Builder builder = new AlertDialog.Builder(contexto);
+                    builder.setMessage("Ya tienes una partida activa si continuas la perderás").setNeutralButton("OK",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    builder.create().show();*/
+                    ElCapricho.iniciarPartida(contexto);
+
+                }else{
+
+                    continuarBoton.setVisibility(View.VISIBLE);
+                }
+
+                //lanza mapa
                 startActivity(intent);
-                //overridePendingTransition(R.anim.zoom_forward_in, R.anim.zoom_forward_out);
+                //overridePendingTransition(R.anim.zoom_forward_in, R.anim.zoom_forward_out); //TODO poner solo en la portada
 
             }
         });
@@ -57,8 +71,7 @@ public class HomeActivity extends AppCompatActivity {
         continuarBoton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(intent2);
-                //overridePendingTransition(R.anim.zoom_forward_in, R.anim.zoom_forward_out);
+                startActivity(intent);
 
             }
         });
@@ -76,6 +89,8 @@ public class HomeActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
+        //TODO acciones del menu
 
         int id = item.getItemId();
 
