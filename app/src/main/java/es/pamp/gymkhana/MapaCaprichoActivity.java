@@ -8,6 +8,10 @@ import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -58,6 +62,12 @@ public class MapaCaprichoActivity extends AppCompatActivity implements GoogleMap
         setContentView(R.layout.activity_mapa_capricho);
         contexto = getApplicationContext();
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        if (savedInstanceState!=null){
+           // resultado = savedInstanceState.getString("RESULTADO");
+        }
         intent = new Intent(this, PuntoActivity.class);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -85,9 +95,8 @@ public class MapaCaprichoActivity extends AppCompatActivity implements GoogleMap
         );
         mPunto00.setTag(0);
 
-        campUp1 = CameraUpdateFactory.newLatLngZoom(posicionInicio, (float)15);
+        campUp1 = CameraUpdateFactory.newLatLngZoom(posicionInicio, (float)16);
         mMap.moveCamera(campUp1);
-
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMarkerClickListener(this);
 
@@ -220,5 +229,61 @@ public class MapaCaprichoActivity extends AppCompatActivity implements GoogleMap
     private void showMissingPermissionError() {
         PermissionUtils.PermissionDeniedDialog
                 .newInstance(true).show(getSupportFragmentManager(), "dialog");
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("CAMARA", mMap.getCameraPosition().target.toString());
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+
+        //TODO acciones del menu
+        final Intent intentHome = new Intent(this, HomeActivity.class);
+        final Intent intentInfo = new Intent(this, PuntoActivity.class);
+
+        int id = item.getItemId();
+
+        switch (id){
+            case R.id.ajustes:{
+                //TODO lanzar ajustes
+                break;
+            }
+            case R.id.acercaDe:{
+                //TODO lanzar acerca de
+                break;
+            }
+            case R.id.home:{
+                startActivity(intentHome);
+                break;
+            }
+            case R.id.action_info:{
+                //Ejecuta la acción siguiente R.id.info
+            }
+            case R.id.info:{
+                intentInfo.putExtra("puntoId", "punto00");
+                startActivity(intentInfo);
+                break;
+            }
+            default:{
+
+                break;
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

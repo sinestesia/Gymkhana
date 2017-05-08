@@ -41,7 +41,9 @@
 
         <activity
             android:name=".MapaCaprichoActivity"
-            android:label="@string/title_activity_mapa_capricho" />
+            android:label="Mapa"
+            android:noHistory="true"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".PuntoActivity"
             android:noHistory="true"

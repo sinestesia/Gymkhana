@@ -1,5 +1,6 @@
 package es.pamp.gymkhana;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -56,22 +57,31 @@ public class PuntoActivity extends AppCompatActivity  {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
+        //TODO acciones del menu
+        final Intent intentHome = new Intent(this, HomeActivity.class);
+        final Intent intentInfo = new Intent(this, PuntoActivity.class);
+
         int id = item.getItemId();
 
         switch (id){
             case R.id.ajustes:{
-                toast = Toast.makeText(this, "Has clicado en ajustes", Toast.LENGTH_SHORT);
-                toast.show();
+                //TODO lanzar ajustes
                 break;
             }
             case R.id.acercaDe:{
-                toast = Toast.makeText(this, "Has clicado en acerca de", Toast.LENGTH_SHORT);
-                toast.show();
+                //TODO lanzar acerca de
                 break;
             }
-            case R.id.action_buscar:{
-                toast = Toast.makeText(this, "Has clicado en Home", Toast.LENGTH_SHORT);
-                toast.show();
+            case R.id.home:{
+                startActivity(intentHome);
+                break;
+            }
+            case R.id.action_info:{
+                //Ejecuta la acción siguiente R.id.info
+            }
+            case R.id.info:{
+                intentInfo.putExtra("puntoId", "punto00");
+                startActivity(intentInfo);
                 break;
             }
             default:{
@@ -83,15 +93,5 @@ public class PuntoActivity extends AppCompatActivity  {
 
         return super.onOptionsItemSelected(item);
     }
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
 
 }

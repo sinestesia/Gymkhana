@@ -8,13 +8,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.webkit.JavascriptInterface;
 
 
 public class WebAppInterface {
-    Context context;
+    AppCompatActivity context;
 
-    public WebAppInterface(Context context){
+    public WebAppInterface(AppCompatActivity context){
         this.context=context;
     }
 
@@ -22,6 +23,8 @@ public class WebAppInterface {
     public void volver() {
         Intent intent = new Intent(context, MapaCaprichoActivity.class);
         context.startActivity(intent);
+        context.finish();
+
     }
 
     @JavascriptInterface
@@ -29,6 +32,7 @@ public class WebAppInterface {
         ElCapricho.completado(context,punto);
         Intent intent = new Intent(context, MapaCaprichoActivity.class);
         context.startActivity(intent);
+        context.finish();
 
     }
 

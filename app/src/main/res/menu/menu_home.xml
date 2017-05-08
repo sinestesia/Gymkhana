@@ -17,8 +17,8 @@
         android:title="Acerca De"
         app:showAsAction="never" />
 
-    <item android:id="@+id/action_buscar"
-        android:title="Buscar"
+    <item android:id="@+id/home"
+        android:title="Home"
         android:icon="@drawable/ic_home"
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />

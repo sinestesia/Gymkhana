@@ -49,6 +49,7 @@ public class HomeActivity extends AppCompatActivity {
                     DialogoAlerta dialogo = new DialogoAlerta();
                     dialogo.show(fragmentManager, "tagAlerta");
 
+
                 }else{
                     ElCapricho.iniciarPartida(contexto);
                     startActivity(intent);
@@ -63,6 +64,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(intent);
+                finish();
 
             }
         });
@@ -82,23 +84,30 @@ public class HomeActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
 
         //TODO acciones del menu
+        final Intent intentHome = new Intent(this, HomeActivity.class);
+        final Intent intentInfo = new Intent(this, PuntoActivity.class);
 
         int id = item.getItemId();
 
         switch (id){
             case R.id.ajustes:{
-                toast = Toast.makeText(this, "Has clicado en ajustes", Toast.LENGTH_SHORT);
-                toast.show();
+                //TODO lanzar ajustes
                 break;
             }
             case R.id.acercaDe:{
-                toast = Toast.makeText(this, "Has clicado en acerca de", Toast.LENGTH_SHORT);
-                toast.show();
+                //TODO lanzar acerca de
                 break;
             }
-            case R.id.action_buscar:{
-                toast = Toast.makeText(this, "Has clicado en Home", Toast.LENGTH_SHORT);
-                toast.show();
+            case R.id.home:{
+                startActivity(intentHome);
+                break;
+            }
+            case R.id.action_info:{
+                //Ejecuta la acción siguiente R.id.info
+            }
+            case R.id.info:{
+                intentInfo.putExtra("puntoId", "punto00");
+                startActivity(intentInfo);
                 break;
             }
             default:{
