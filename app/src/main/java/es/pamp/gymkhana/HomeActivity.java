@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -43,27 +44,17 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (ElCapricho.estaIniciado(contexto)){
-                    //TODO mostrar dialogo de confirmación
-                    /*
-                    AlertDialog.Builder builder = new AlertDialog.Builder(contexto);
-                    builder.setMessage("Ya tienes una partida activa si continuas la perderás").setNeutralButton("OK",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    builder.create().show();*/
-                    ElCapricho.iniciarPartida(contexto);
+
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    DialogoAlerta dialogo = new DialogoAlerta();
+                    dialogo.show(fragmentManager, "tagAlerta");
 
                 }else{
+                    ElCapricho.iniciarPartida(contexto);
+                    startActivity(intent);
+                    finish();
 
-                    continuarBoton.setVisibility(View.VISIBLE);
                 }
-
-                //lanza mapa
-                startActivity(intent);
-                //overridePendingTransition(R.anim.zoom_forward_in, R.anim.zoom_forward_out); //TODO poner solo en la portada
 
             }
         });

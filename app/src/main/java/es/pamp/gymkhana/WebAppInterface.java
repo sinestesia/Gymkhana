@@ -29,6 +29,7 @@ public class WebAppInterface {
         ElCapricho.completado(context,punto);
         Intent intent = new Intent(context, MapaCaprichoActivity.class);
         context.startActivity(intent);
+
     }
 
 /*

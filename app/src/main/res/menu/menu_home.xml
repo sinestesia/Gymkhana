@@ -19,7 +19,7 @@
 
     <item android:id="@+id/action_buscar"
         android:title="Buscar"
-        android:icon="@drawable/ic_action_name"
+        android:icon="@drawable/ic_home"
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
     <item android:id="@+id/action_info"

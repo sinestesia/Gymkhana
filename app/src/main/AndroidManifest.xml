@@ -44,6 +44,7 @@
             android:label="@string/title_activity_mapa_capricho" />
         <activity
             android:name=".PuntoActivity"
+            android:noHistory="true"
             android:label="@string/title_activity_punto"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
