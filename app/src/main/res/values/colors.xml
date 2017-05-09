@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#a5b077</color>
-    <color name="colorPrimaryDark">#676e4a</color>
+    <!--pamp-->
+    <!--<color name="colorPrimary">#005e51</color>
+    <color name="colorPrimaryDark">#003e36</color>
+    <color name="colorAccent">#ea8e59</color>-->
+    <color name="fondo">#ebe3cd</color>
+    <color name="verde_campo">#545b3b</color>
+    <!--<color name="agua">#b8d3c0</color>-->
+
+
+    <!--patri-->
+    <color name="colorPrimary">#adbcad</color>
+    <color name="colorPrimaryDark">#677068</color>
     <color name="colorAccent">#ea8e59</color>
+
     <!--<color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>-->

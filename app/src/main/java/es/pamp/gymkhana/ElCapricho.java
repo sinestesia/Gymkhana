@@ -104,16 +104,17 @@ public final class ElCapricho {
         SharedPreferences capricho = contexto.getSharedPreferences("PREFERENCE_CAPRICHO", Context.MODE_PRIVATE);
         switch (capricho.getString(punto, "Desactivado")){
             case "Activo":
-                i=R.drawable.ic_activado;
+                i=R.mipmap.ic_activado;
+                ;
                 break;
             case "Desactivado":
-                i = R.drawable.ic_desactivado;
+                i = R.mipmap.ic_desactivado;
                 break;
             case "Completado":
-                i= R.drawable.ic_completado;
+                i= R.mipmap.ic_completado;
                 break;
             default:
-                i = R.drawable.ic_desactivado;
+                i = R.mipmap.ic_desactivado;
                 break;
         }
         return i;
