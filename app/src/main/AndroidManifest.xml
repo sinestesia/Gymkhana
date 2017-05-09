@@ -20,6 +20,7 @@
         <activity
             android:name=".HomeActivity"
             android:label="@string/app_name"
+            android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,7 +43,6 @@
         <activity
             android:name=".MapaCaprichoActivity"
             android:label="Mapa"
-            android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".PuntoActivity"

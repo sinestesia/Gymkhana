@@ -22,6 +22,7 @@ public class WebAppInterface {
     @JavascriptInterface
     public void volver() {
         Intent intent = new Intent(context, MapaCaprichoActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//excluye de pendientes para que solo haya un mapa
         context.startActivity(intent);
         context.finish();
 
@@ -31,6 +32,7 @@ public class WebAppInterface {
     public void completado(String punto) {
         ElCapricho.completado(context,punto);
         Intent intent = new Intent(context, MapaCaprichoActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//excluye de pendientes para que solo haya un mapa
         context.startActivity(intent);
         context.finish();
 
