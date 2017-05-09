@@ -96,11 +96,12 @@ public class MapaCaprichoActivity extends AppCompatActivity implements GoogleMap
 
         // Marker https://developers.google.com/maps/documentation/android-api/marker?hl=es-419
         posicionInicio = new LatLng(40.4566113,-3.5988973);
-        //TODO poner getLongitud y getLatitud de la clase ElCapricho
+        //TODO poner getLongitud, getLatitud y visible de la clase ElCapricho
         mPunto00 = mMap.addMarker(new MarkerOptions()
                 .position(posicionInicio)
                 .title("El Capricho")
                 .snippet("")
+                //.visible(false) Si se quiere ocultar
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_info))
         );
         mPunto00.setTag(0);
@@ -131,6 +132,7 @@ public class MapaCaprichoActivity extends AppCompatActivity implements GoogleMap
                 .position(new LatLng(40.4550444,-3.6007091))
                 .title("Inicio")
                 .snippet("texto snippet")
+                        //.visible(false) Si se quiere ocultar
                 .icon(BitmapDescriptorFactory.fromResource(ElCapricho.icono(contexto,"punto01")))
                 );
         mPunto01.setTag(1);
@@ -139,6 +141,7 @@ public class MapaCaprichoActivity extends AppCompatActivity implements GoogleMap
                 .position(new LatLng(40.454911,-3.6001023))
                 .title("Bloqueado")
                 .snippet("texto snippet")
+                //.visible(false) Si se quiere ocultar
                 .icon(BitmapDescriptorFactory.fromResource(ElCapricho.icono(contexto,"punto02")))
         );
         mPunto02.setTag(2);
@@ -147,6 +150,7 @@ public class MapaCaprichoActivity extends AppCompatActivity implements GoogleMap
                 .position(new LatLng(40.455852,-3.5976546))
                 .title("Bloqueado")
                 .snippet("Completa pruebas para desbloquearlo")
+                //.visible(false) Si se quiere ocultar
                 .icon(BitmapDescriptorFactory.fromResource(ElCapricho.icono(contexto,"punto03")))
         );
         mPunto03.setTag(3);
@@ -155,6 +159,7 @@ public class MapaCaprichoActivity extends AppCompatActivity implements GoogleMap
                 .position(new LatLng(40.456542,-3.5961936))
                 .title("Bloqueado")
                 .snippet("Completa pruebas para desbloquearlo")
+                //.visible(false) Si se quiere ocultar
                 .icon(BitmapDescriptorFactory.fromResource(ElCapricho.icono(contexto,"punto04")))
         );
         mPunto04.setTag(4);
