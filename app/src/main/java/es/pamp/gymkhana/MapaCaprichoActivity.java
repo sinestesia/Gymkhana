@@ -19,6 +19,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
@@ -50,6 +51,9 @@ public class MapaCaprichoActivity extends AppCompatActivity implements GoogleMap
     private Marker mPunto13;
     private Marker mPunto14;
     private Marker mPunto15;
+    private Float zoom;
+    private Double latitude;
+    private Double longitude;
 
 
     //permisos
@@ -66,7 +70,9 @@ public class MapaCaprichoActivity extends AppCompatActivity implements GoogleMap
         setSupportActionBar(toolbar);
 
         if (savedInstanceState!=null){
-           // resultado = savedInstanceState.getString("RESULTADO");
+            zoom = savedInstanceState.getFloat("ZOOM");
+            latitude = savedInstanceState.getDouble("LATITUDE");
+            longitude = savedInstanceState.getDouble("LONGITUDE");
         }
         intent = new Intent(this, PuntoActivity.class);
 
@@ -97,8 +103,15 @@ public class MapaCaprichoActivity extends AppCompatActivity implements GoogleMap
         );
         mPunto00.setTag(0);
 
-        campUp1 = CameraUpdateFactory.newLatLngZoom(posicionInicio, (float)16);
+        if (zoom != null){
+            //Se restauran los valores guardados en saveinstance
+            campUp1 = CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude), (float)zoom);
+        }else{
+            campUp1 = CameraUpdateFactory.newLatLngZoom(posicionInicio, (float)16);
+        }
+
         mMap.moveCamera(campUp1);
+
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMarkerClickListener(this);
 
@@ -233,12 +246,7 @@ public class MapaCaprichoActivity extends AppCompatActivity implements GoogleMap
                 .newInstance(true).show(getSupportFragmentManager(), "dialog");
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString("CAMARA", mMap.getCameraPosition().target.toString());
 
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -288,4 +296,14 @@ public class MapaCaprichoActivity extends AppCompatActivity implements GoogleMap
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putFloat("ZOOM", mMap.getCameraPosition().zoom);
+        outState.putDouble("LATITUDE",mMap.getCameraPosition().target.latitude);
+        outState.putDouble("LONGITUDE",mMap.getCameraPosition().target.longitude);
+
+    }
+
 }
