@@ -12,17 +12,14 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.HashMap;
-
-
+import java.util.HashSet;
+import java.util.Set;
 
 
 public final class ElCapricho {
 
-
-    /*public static final String PACKAGE_NAME = "com.google.android.gms.location.Geofence";*/
     public ElCapricho() {
     }
-
 
     public static final void iniciarPartida(Context contexto) {
         SharedPreferences capricho = contexto.getSharedPreferences("PREFERENCE_CAPRICHO", Context.MODE_PRIVATE);
@@ -50,6 +47,36 @@ public final class ElCapricho {
         editor.putString("punto15", "Desactivado");
 
         editor.commit();
+
+       /* SharedPreferences caprichoPuntos = contexto.getSharedPreferences("PREFERENCE_ELCAPRICHO", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editorPuntos = caprichoPuntos.edit();
+
+
+        HashSet<String> mySet = new HashSet<String>();
+        mySet.add("Info"); //0 estado
+        mySet.add("Título"); //1 título de la página asociada y nombre que aparecerá en el mapa
+        mySet.add("Snippet"); //2 Snippet del punto en el mapa
+        mySet.add("40.4566113"); //3 latitud
+        mySet.add("-3.5988973"); //4 longitud
+        editorPuntos.putStringSet("punto00", mySet);
+
+        mySet.clear();
+        mySet.add("Activo");
+        mySet.add("Título01");
+        mySet.add("Snippet");
+        mySet.add(""); //latitud
+        mySet.add(""); //longitud
+        editorPuntos.putStringSet("punto01", mySet);
+
+        mySet.clear();
+        mySet.add("Desactivado");
+        mySet.add("Título02");
+        mySet.add("Snippet");
+        mySet.add(""); //latitud
+        mySet.add(""); //longitud
+        editorPuntos.putStringSet("punto02", mySet);
+
+        editorPuntos.commit(); */
 
     }
 
@@ -117,5 +144,58 @@ public final class ElCapricho {
         editor.commit();
 
     }
+    /*
+    public static final Double getLatitud(Context contexto, String punto){
+        Double latitud;
+
+        SharedPreferences caprichoPuntos = contexto.getSharedPreferences("PREFERENCE_ELCAPRICHO", Context.MODE_PRIVATE);
+        Set<String> mySet = caprichoPuntos.getStringSet(punto,null);
+
+        String[] arrayPuntos = null;
+        arrayPuntos = mySet.toArray(new String[mySet.size()]);
+
+        if (mySet != null) {
+            latitud=Double.parseDouble(arrayPuntos[3]);
+        }else {
+            latitud=0.0;
+        }
+
+        return latitud;
+    }
+    public static final Double getLongitud(Context contexto, String punto){
+        Double latitud;
+
+        SharedPreferences caprichoPuntos = contexto.getSharedPreferences("PREFERENCE_ELCAPRICHO", Context.MODE_PRIVATE);
+        Set<String> mySet = caprichoPuntos.getStringSet(punto,null);
+
+        String[] arrayPuntos = null;
+        arrayPuntos = mySet.toArray(new String[mySet.size()]);
+
+        if (mySet != null) {
+            latitud=Double.parseDouble(arrayPuntos[3]);
+        }else {
+            latitud=0.0;
+        }
+
+        return latitud;
+    }
+
+    public static final String titulo(Context contexto, String punto){
+        String titulo;
+
+        SharedPreferences caprichoPuntos = contexto.getSharedPreferences("PREFERENCE_ELCAPRICHO", Context.MODE_PRIVATE);
+        Set<String> mySet = caprichoPuntos.getStringSet(punto,null);
+
+        String[] arrayPuntos = null;
+        arrayPuntos = mySet.toArray(new String[mySet.size()]);
+
+        if (mySet != null) {
+            titulo=arrayPuntos[1];
+        }else {
+            titulo="";
+        }
+
+        return titulo;
+    } */
 
 }

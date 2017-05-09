@@ -49,14 +49,11 @@ public class HomeActivity extends AppCompatActivity {
                     DialogoAlerta dialogo = new DialogoAlerta();
                     dialogo.show(fragmentManager, "tagAlerta");
 
-
                 }else{
                     ElCapricho.iniciarPartida(contexto);
                     startActivity(intent);
                     finish();
-
                 }
-
             }
         });
 

@@ -38,6 +38,9 @@ public class PuntoActivity extends AppCompatActivity  {
         mySettings.setJavaScriptEnabled(true);
 
         String puntoActivo = getIntent().getExtras().getString("puntoId");
+        //String titulo = ElCapricho.titulo(getApplicationContext(),puntoActivo); //TODO poner título
+        String titulo = "Título del punto";
+        setTitle(titulo);
 
         String web = "file:///android_asset/elcapricho/" + puntoActivo + ".html";
         myWebView.loadUrl(web);

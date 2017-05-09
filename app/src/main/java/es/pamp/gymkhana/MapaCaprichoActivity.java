@@ -34,6 +34,7 @@ public class MapaCaprichoActivity extends AppCompatActivity implements GoogleMap
     private Intent intent;
     private Context contexto;
 
+    //TODO Convertir en lista los marcadores
     //marcadores
     private Marker mPunto00;
     private Marker mPunto01;
@@ -95,10 +96,11 @@ public class MapaCaprichoActivity extends AppCompatActivity implements GoogleMap
 
         // Marker https://developers.google.com/maps/documentation/android-api/marker?hl=es-419
         posicionInicio = new LatLng(40.4566113,-3.5988973);
+        //TODO poner getLongitud y getLatitud de la clase ElCapricho
         mPunto00 = mMap.addMarker(new MarkerOptions()
                 .position(posicionInicio)
                 .title("El Capricho")
-                //.snippet("Parque del capricho /n Horario: Sábados y festivos de 9:00 a 21:00")
+                .snippet("")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_info))
         );
         mPunto00.setTag(0);
@@ -123,10 +125,12 @@ public class MapaCaprichoActivity extends AppCompatActivity implements GoogleMap
 
     public void pintarMarcadores(){
 
+        //TODO cargar la información de marcadores a una lista
+
         mPunto01 = mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(40.4550444,-3.6007091))
                 .title("Inicio")
-                //.snippet("texto snippet")
+                .snippet("texto snippet")
                 .icon(BitmapDescriptorFactory.fromResource(ElCapricho.icono(contexto,"punto01")))
                 );
         mPunto01.setTag(1);
@@ -156,8 +160,6 @@ public class MapaCaprichoActivity extends AppCompatActivity implements GoogleMap
         mPunto04.setTag(4);
 
 
-
-
     }
 
     /** Se llama al hacer click en un marcador */
@@ -167,38 +169,15 @@ public class MapaCaprichoActivity extends AppCompatActivity implements GoogleMap
         // Recupera la información del marcador
         Integer marcadorId = (Integer) marker.getTag();
 
-
-        switch (marcadorId){
-            case 0:
-                intent.putExtra("puntoId", "punto00");
-                startActivity(intent);
-                break;
-            case 1:
-                intent.putExtra("puntoId", "punto01");
-                startActivity(intent);
-                break;
-            case 2:
-                if (!ElCapricho.estaDesactivado(contexto,"punto02")){
-                    intent.putExtra("puntoId", "punto02");
-                    startActivity(intent);
-                }
-                break;
-            case 3:
-                if (!ElCapricho.estaDesactivado(contexto,"punto03")){
-                    intent.putExtra("puntoId", "punto03");
-                    startActivity(intent);
-                }
-                break;
-            case 4:
-                if (!ElCapricho.estaDesactivado(contexto,"punto04")){
-                    intent.putExtra("puntoId", "punto04");
-                    startActivity(intent);
-                }
-                break;
-            default:
-                break;
+        //le pasa el nombre del punto punto00...punto99
+        if (marcadorId<10){
+            intent.putExtra("puntoId", "punto0"+marcadorId);
+            startActivity(intent);
         }
-
+        else{
+            intent.putExtra("puntoId", "punto"+marcadorId);
+            startActivity(intent);
+        }
 
         // Return false to indicate that we have not consumed the event and that we wish
         // for the default behavior to occur (which is for the camera to move such that the
@@ -247,7 +226,6 @@ public class MapaCaprichoActivity extends AppCompatActivity implements GoogleMap
     }
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -281,7 +259,9 @@ public class MapaCaprichoActivity extends AppCompatActivity implements GoogleMap
                 break;
             }
             case R.id.action_info:{
-                //Ejecuta la acción siguiente R.id.info
+                intentInfo.putExtra("puntoId", "punto00");
+                startActivity(intentInfo);
+                break;
             }
             case R.id.info:{
                 intentInfo.putExtra("puntoId", "punto00");
